@@ -25,7 +25,7 @@ class Analyzer
         array $defaultConfig = [],
         ?string $nonce = null,
     ) {
-        $measurementId = '';
+        $measurementId = 'G-1CFC6BYDBW';
         $this->setMeasurementId($measurementId);
         $this->defaultConfig = $defaultConfig;
         $this->nonce = $nonce;
