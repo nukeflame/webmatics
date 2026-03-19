@@ -31,7 +31,7 @@ class TrackCoverRequest
     private function record(Request $request, Response $response, int $responseTime): void
     {
         try {
-            CoverRequest::create([
+            $d = CoverRequest::create([
                 'server_id'     => config('monit.server_id'),
                 'url'           => $request->fullUrl(),
                 'method'        => $request->method(),
@@ -41,7 +41,10 @@ class TrackCoverRequest
                 'user_agent'    => substr((string) $request->userAgent(), 0, 255),
                 'user_id'       => $request->user()?->getKey(),
             ]);
-        } catch (\Throwable) {
+
+            logger()->debug(json_encode($d, JSON_PRETTY_PRINT));
+        } catch (\Exception $e) {
+            logger($e);
             // Never let monitoring break the application
         }
     }

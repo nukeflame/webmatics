@@ -2,6 +2,7 @@
 
 namespace Nukeflame\Webmatics;
 
+use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Support\ServiceProvider;
 use Nukeflame\Webmatics\Console\Commands\PruneRequestLogs;
 use Nukeflame\Webmatics\Http\Middleware\MonitBasicAuth;
@@ -30,6 +31,8 @@ class WebmaticsServiceProvider extends ServiceProvider
             'track.requests',
             TrackCoverRequest::class
         );
+
+        $this->app->make(HttpKernel::class)->pushMiddleware(TrackCoverRequest::class);
 
         $configFile = __DIR__ . '/../config/monit.php';
         if (is_file($configFile)) {
