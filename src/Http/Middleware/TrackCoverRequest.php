@@ -1,6 +1,6 @@
 <?php
 
-namespace Acentria\ServerMonitor\Http\Middleware;
+namespace Nukeflame\Webmatics\Http\Middleware;
 
 use App\Models\CoverRequest;
 use Closure;

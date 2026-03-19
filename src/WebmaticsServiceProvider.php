@@ -2,9 +2,10 @@
 
 namespace Nukeflame\Webmatics;
 
-use Acentria\ServerMonitor\Http\Middleware\TrackCoverRequest;
 use Illuminate\Support\ServiceProvider;
 use Nukeflame\Webmatics\Console\Commands\PruneRequestLogs;
+use Nukeflame\Webmatics\Http\Middleware\MonitBasicAuth;
+use Nukeflame\Webmatics\Http\Middleware\TrackCoverRequest;
 
 class WebmaticsServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,16 @@ class WebmaticsServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->app['router']->aliasMiddleware(
+            'monit.auth',
+            MonitBasicAuth::class
+        );
+
+        $this->app['router']->aliasMiddleware(
+            'track.requests',
+            TrackCoverRequest::class
+        );
+
         $configFile = __DIR__ . '/../config/monit.php';
         if (is_file($configFile)) {
             $this->publishes([
@@ -45,10 +56,5 @@ class WebmaticsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([PruneRequestLogs::class]);
         }
-
-        $this->app['router']->aliasMiddleware(
-            'track.requests',
-            TrackCoverRequest::class
-        );
     }
 }
