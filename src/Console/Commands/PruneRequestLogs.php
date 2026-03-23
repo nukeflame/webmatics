@@ -12,9 +12,11 @@ class PruneRequestLogs extends Command
 
     public function handle(): int
     {
-        $days    = (int) ($this->option('days') ?? config('monit.retention_days', 30));
+        $days    = (int) ($this->option('days') ?? config('monit.retention_days', 7));
         $cutoff  = now()->subDays($days);
         $deleted = CoverRequest::where('created_at', '<', $cutoff)->delete();
+
+        logger()->debug('worked');
 
         $this->info("Pruned {$deleted} request record(s) older than {$days} days.");
 

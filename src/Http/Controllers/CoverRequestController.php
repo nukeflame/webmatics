@@ -55,8 +55,6 @@ class CoverRequestController extends Controller
                 ->orderBy('status_code')
                 ->pluck('total', 'status_code');
 
-            // logger()->debug(json_encode($perServer, JSON_PRETTY_PRINT));
-
             return response()->json([
                 'summary' => [
                     'total_requests'    => $total,
@@ -71,7 +69,6 @@ class CoverRequestController extends Controller
                 'status_breakdown'  => $statusBreakdown,
             ]);
         } catch (\Exception $e) {
-            logger($e);
         }
     }
 

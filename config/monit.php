@@ -40,6 +40,8 @@ return [
         'horizon*',
         'telescope*',
         'livewire/update',
+        'monit/*',
+        'monit',
     ],
 
     'exclude_status_codes' => [],
@@ -52,7 +54,7 @@ return [
     | deletes anything older than this. Add it to your scheduler:
     |   $schedule->command('monit:prune')->daily();
     */
-    'retention_days' => env('SERVER_MONITOR_RETENTION_DAYS', 30),
+    'retention_days' => env('SERVER_MONITOR_RETENTION_DAYS', 7),
 
     /*
     |--------------------------------------------------------------------------

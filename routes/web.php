@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Nukeflame\Webmatics\Http\Controllers\MonitorController;
 use Nukeflame\Webmatics\Http\Controllers\CoverRequestController;
 
 
@@ -11,6 +12,7 @@ Route::middleware(['monit.auth'])
         Route::get('/api',        [CoverRequestController::class, 'index'])->name('index');
         Route::get('/api/metrics', [CoverRequestController::class, 'metrics'])->name('metrics');
         Route::get('/api/logs',    [CoverRequestController::class, 'logs'])->name('logs');
+        Route::post('terminal', [MonitorController::class, 'terminal'])->name('terminal');
     });
 
 Route::get('/monit/logout', function () {
