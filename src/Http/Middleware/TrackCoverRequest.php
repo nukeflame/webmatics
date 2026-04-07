@@ -21,9 +21,9 @@ class TrackCoverRequest
 
         $responseTime = (int) round((microtime(true) - $start) * 1000);
 
-        if (! $this->isExcludedStatus($response->getStatusCode())) {
-            $this->record($request, $response, $responseTime);
-        }
+        // if (! $this->isExcludedStatus($response->getStatusCode())) {
+        //     $this->record($request, $response, $responseTime);
+        // }
 
         return $response;
     }
